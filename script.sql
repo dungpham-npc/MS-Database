@@ -233,3 +233,10 @@ CREATE TABLE promotion_products (
     FOREIGN KEY (promotion_id) REFERENCES promotion_campaign(id),
     FOREIGN KEY (product_id) REFERENCES milk_product(product_id)
 );
+
+INSERT INTO role(role_name) VALUES('CUSTOMER');
+INSERT INTO role(role_name) VALUES('SELLER');
+INSERT INTO role(role_name) VALUES('MANAGER');
+INSERT INTO role(role_name) VALUES('POST_STAFF');
+INSERT INTO role(role_name) VALUES('PRODUCT_STAFF');
+INSERT INTO role(role_name) VALUES('ADMIN');
