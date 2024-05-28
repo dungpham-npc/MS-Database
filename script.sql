@@ -38,10 +38,11 @@ CREATE TABLE address (
 CREATE TABLE User (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     role_id INT NOT NULL,
-    username VARCHAR(20),
     email_address VARCHAR(255) UNIQUE NOT NULL,
-    phone_Number VARCHAR(15) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
+    phone_Number VARCHAR(15) UNIQUE,
+    password VARCHAR(255),
+    username NVARCHAR(100),
+    visibility_status BOOLEAN,
     FOREIGN KEY (role_id) REFERENCES role(role_id)
 );
 
