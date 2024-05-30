@@ -60,6 +60,7 @@ CREATE TABLE post (
     content TEXT NOT NULL,
     date_created DATETIME NOT NULL,
     user_comment TEXT,
+	visibility_status BOOLEAN,
     FOREIGN KEY (user_id) REFERENCES User(user_id)
 );
 
