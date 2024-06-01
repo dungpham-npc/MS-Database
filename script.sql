@@ -74,6 +74,7 @@ CREATE TABLE milk_product (
     product_image VARCHAR(255) NOT NULL,
     quantity_in_stock INT NOT NULL CHECK (quantity_in_stock >= 0),
     price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
+    status boolean,
     FOREIGN KEY (category_id) REFERENCES milk_product_category(id),
     FOREIGN KEY (post_id) REFERENCES post(id)
 );
