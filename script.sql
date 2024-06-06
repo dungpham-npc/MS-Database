@@ -58,18 +58,19 @@ CREATE TABLE post (
     user_id INT NOT NULL,
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
-    date_created DATETIME NOT NULL,
+    date_created DATETIME,
     user_comment TEXT,
 	visibility_status BOOLEAN,
     FOREIGN KEY (user_id) REFERENCES User(user_id)
 );
 
+-- drop table milk_product;
 -- Create the milk_product table
 CREATE TABLE milk_product (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
     category_id INT NOT NULL,
     post_id INT,
-    product_name VARCHAR(255) UNIQUE NOT NULL,
+    product_name VARCHAR(255) NOT NULL,
     product_description TEXT NOT NULL,
     product_image VARCHAR(255) NOT NULL,
     quantity_in_stock INT NOT NULL CHECK (quantity_in_stock >= 0),
