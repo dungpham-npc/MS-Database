@@ -239,6 +239,12 @@ CREATE TABLE promotion_products (
     FOREIGN KEY (product_id) REFERENCES milk_product(product_id)
 );
 
+CREATE TABLE payment (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    amount INT,
+    payment_url VARCHAR(255)
+);
+
 INSERT INTO role(role_name) VALUES('CUSTOMER');
 INSERT INTO role(role_name) VALUES('SELLER');
 INSERT INTO role(role_name) VALUES('MANAGER');
