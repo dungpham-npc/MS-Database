@@ -43,7 +43,18 @@ CREATE TABLE User (
     password VARCHAR(255),
     username NVARCHAR(100),
     visibility_status BOOLEAN,
+	prohibit_status BOOLEAN,
+	otp_code VARCHAR(255),
+    otp_created_at DATETIME,
+	otp_expired_at DATETIME,
     FOREIGN KEY (role_id) REFERENCES role(role_id)
+);
+
+CREATE TABLE temporary_user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    otp_code VARCHAR(255),
+    otp_created_at DATETIME
+	otp_expired_at DATETIME
 );
 
 -- Create the milk_product_category table
@@ -252,21 +263,5 @@ INSERT INTO role(role_name) VALUES('POST_STAFF');
 INSERT INTO role(role_name) VALUES('PRODUCT_STAFF');
 INSERT INTO role(role_name) VALUES('ADMIN');
 
-INSERT INTO User (role_id, username, email_address, phone_number, password)
-VALUES (1, 'customer', 'a@example.com', '123-456-7890', '123');
 
-INSERT INTO User (role_id, username, email_address, phone_number, password)
-VALUES (2, 'seller', 'b@example.com', '987-654-3210', '123');
-
-INSERT INTO User (role_id, username, email_address, phone_number, password)
-VALUES (3, 'manager', 'c@example.com', '567-890-1234', '123');
-
-INSERT INTO User (role_id, username, email_address, phone_number, password)
-VALUES (4, 'post_staff', 'd@example.com', '234-567-8901', '123');
-
-INSERT INTO User (role_id, username, email_address, phone_number, password)
-VALUES (5, 'production_staff', 'e@example.com', '890-123-4567', '123');
-
-INSERT INTO User (role_id, username, email_address, phone_number, password)
-VALUES (6, 'admin', 'f@example.com', '456-789-0123', '123');
 
