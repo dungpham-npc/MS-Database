@@ -19,10 +19,10 @@ CREATE TABLE payment_type (
 );
 
 -- Create the order_status table
-CREATE TABLE order_status (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    status VARCHAR(50) UNIQUE NOT NULL
-);
+-- CREATE TABLE order_status (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     status VARCHAR(50) UNIQUE NOT NULL
+-- );
 
 -- Create the address table
 CREATE TABLE address (
@@ -87,6 +87,8 @@ CREATE TABLE milk_product (
     product_image VARCHAR(255) NOT NULL,
     quantity_in_stock INT NOT NULL CHECK (quantity_in_stock >= 0),
     price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
+    manu_date DATE NOT NULL,
+    expi_date DATE NOT NULL,
     status boolean,
     FOREIGN KEY (category_id) REFERENCES milk_product_category(id),
     FOREIGN KEY (post_id) REFERENCES post(id)
@@ -116,15 +118,15 @@ CREATE TABLE voucher (
 );
 
 -- Create the customer_payment_method table
-CREATE TABLE customer_payment_method (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    payment_type_id INT NOT NULL,
-    account_number VARCHAR(50) UNIQUE NOT NULL,
-    is_default BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY (user_id) REFERENCES User(user_id),
-    FOREIGN KEY (payment_type_id) REFERENCES payment_type(id)
-);
+-- CREATE TABLE customer_payment_method (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     user_id INT NOT NULL,
+--     payment_type_id INT NOT NULL,
+--     account_number VARCHAR(50) UNIQUE NOT NULL,
+--     is_default BOOLEAN DEFAULT FALSE,
+--     FOREIGN KEY (user_id) REFERENCES User(user_id),
+--     FOREIGN KEY (payment_type_id) REFERENCES payment_type(id)
+-- );
 
 -- Create the order table
 CREATE TABLE `order` (
@@ -200,14 +202,18 @@ CREATE TABLE post_report (
 
 -- Create the transaction_log table
 CREATE TABLE transaction_log (
-    transaction_id INT AUTO_INCREMENT PRIMARY KEY,
+    transaction_id int AUTO_INCREMENT PRIMARY KEY,
     order_id INT NOT NULL,
-    payment_type_id INT NOT NULL,
-    date DATETIME NOT NULL,
-    content TEXT NOT NULL,
-    amount DECIMAL(10, 2) NOT NULL CHECK (amount >= 0),
-    FOREIGN KEY (order_id) REFERENCES `order`(id),
-    FOREIGN KEY (payment_type_id) REFERENCES payment_type(id)
+    amount DECIMAL(10, 2) NOT NULL,
+    bank_code VARCHAR(255) NOT NULL,
+    bank_trans_no VARCHAR(255) NOT NULL,
+    cart_type VARCHAR(255) NOT NULL,
+    order_info VARCHAR(255) NOT NULL,
+    response_code VARCHAR(255) NOT NULL,
+    pay_date VARCHAR(255) NOT NULL,
+    transaction_no VARCHAR(255) NOT NULL,
+    transaction_status VARCHAR(255) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES `order`(id)
 );
 
 -- Create the user_voucher table
@@ -251,11 +257,11 @@ CREATE TABLE promotion_products (
     FOREIGN KEY (product_id) REFERENCES milk_product(product_id)
 );
 
-CREATE TABLE payment (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    amount INT,
-    payment_url VARCHAR(255)
-);
+-- CREATE TABLE payment (
+--     id BIGINT AUTO_INCREMENT PRIMARY KEY,
+--     amount INT,
+--     payment_url VARCHAR(255)
+-- );
 
 INSERT INTO role(role_name) VALUES('CUSTOMER');
 INSERT INTO role(role_name) VALUES('SELLER');
