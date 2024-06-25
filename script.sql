@@ -132,7 +132,7 @@ CREATE TABLE voucher (
 CREATE TABLE `order` (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    customer_payment_method_id INT NOT NULL,
+    -- customer_payment_method_id INT NOT NULL,
     shipping_address INT NOT NULL,
     order_status INT NOT NULL,
     voucher_id INT,
@@ -146,9 +146,9 @@ CREATE TABLE `order` (
     failure_reason ENUM('Out of Stock', 'Payment Failed', 'Cancelled'),
     failure_reason_note TEXT,
     FOREIGN KEY (user_id) REFERENCES User(user_id),
-    FOREIGN KEY (customer_payment_method_id) REFERENCES customer_payment_method(id),
+--     FOREIGN KEY (customer_payment_method_id) REFERENCES customer_payment_method(id),
     FOREIGN KEY (shipping_address) REFERENCES address(id),
-    FOREIGN KEY (order_status) REFERENCES order_status(id),
+--     FOREIGN KEY (order_status) REFERENCES order_status(id),
     FOREIGN KEY (voucher_id) REFERENCES voucher(voucherid),
     FOREIGN KEY (cart_id) REFERENCES shopping_cart(id)
 );
