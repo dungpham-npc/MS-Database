@@ -78,12 +78,12 @@ INSERT INTO shopping_cart (user_id) VALUES
 (10);
 
 
-INSERT INTO `order` (user_id, customer_payment_method_id, shipping_address, order_status, voucher_id, cart_id, shipping_fee, total_price, shipping_code, receiver_name, receiver_phone, order_date, failure_reason, failure_reason_note) VALUES
-(6, 1, 1, 1, NULL, 1, 5.00, 45.97, 'SH12345', 'customer1', '1234567890', '2024-01-15 10:00:00', NULL, NULL),
-(7, 2, 2, 2, NULL, 2, 5.00, 39.97, 'SH12346', 'customer2', '0987654321', '2024-01-16 12:00:00', 'Out of Stock', 'One item out of stock.'),
-(8, 3, 3, 3, NULL, 3, 5.00, 49.97, 'SH12347', 'customer3', '1122334455', '2024-01-17 15:00:00', 'Payment Failed', 'Payment could not be processed.'),
-(9, 4, 4, 4, NULL, 4, 5.00, 59.97, 'SH12348', 'customer4', '6677889900', '2024-01-18 17:00:00', 'Cancelled', 'Order was cancelled by user.'),
-(10, 5, 5, 1, NULL, 5, 5.00, 29.97, 'SH12349', 'customer5', '5544332211', '2024-01-19 11:00:00', NULL, NULL);
+INSERT INTO `order` (user_id, shipping_address, order_status, voucher_id, cart_id, shipping_fee, total_price, shipping_code, receiver_name, receiver_phone, order_date, failure_reason, failure_reason_note) VALUES
+(6, 1, 1, NULL, 1, 5.00, 45.97, 'SH12345', 'customer1', '1234567890', '2024-01-15 10:00:00', NULL, NULL),
+(7, 2, 2, NULL, 2, 5.00, 39.97, 'SH12346', 'customer2', '0987654321', '2024-01-16 12:00:00', 'Out of Stock', 'One item out of stock.'),
+(8, 3, 3, NULL, 3, 5.00, 49.97, 'SH12347', 'customer3', '1122334455', '2024-01-17 15:00:00', 'Payment Failed', 'Payment could not be processed.'),
+(9, 4, 4, NULL, 4, 5.00, 59.97, 'SH12348', 'customer4', '6677889900', '2024-01-18 17:00:00', 'Cancelled', 'Order was cancelled by user.'),
+(10, 5, 1, NULL, 5, 5.00, 29.97, 'SH12349', 'customer5', '5544332211', '2024-01-19 11:00:00', NULL, NULL);
 
 
 INSERT INTO order_item (milk_product_id, voucher_id, order_id, quantity, price) VALUES
