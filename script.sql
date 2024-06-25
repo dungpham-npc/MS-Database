@@ -52,6 +52,7 @@ CREATE TABLE User (
 
 CREATE TABLE temporary_user (
     id INT AUTO_INCREMENT PRIMARY KEY,
+	email_address VARCHAR(50),
     otp_code VARCHAR(255),
     otp_created_at DATETIME
 	otp_expired_at DATETIME
