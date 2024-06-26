@@ -130,7 +130,7 @@ CREATE TABLE voucher (
 
 -- Create the order table
 CREATE TABLE `order` (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id long AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     -- customer_payment_method_id INT NOT NULL,
     shipping_address INT NOT NULL,
@@ -203,7 +203,7 @@ CREATE TABLE post_report (
 -- Create the transaction_log table
 CREATE TABLE transaction_log (
     transaction_id int AUTO_INCREMENT PRIMARY KEY,
-    order_id INT NOT NULL,
+    order_id long NOT NULL,
     amount DECIMAL(10, 2) NOT NULL,
     bank_code VARCHAR(255) NOT NULL,
     bank_trans_no VARCHAR(255) NOT NULL,
@@ -262,6 +262,24 @@ CREATE TABLE promotion_products (
 --     amount INT,
 --     payment_url VARCHAR(255)
 -- );
+
+INSERT INTO User (role_id, username, email_address, phone_number, password)
+VALUES (1, 'customer', 'a@example.com', '123-456-7890', '123');
+
+INSERT INTO User (role_id, username, email_address, phone_number, password)
+VALUES (2, 'seller', 'b@example.com', '987-654-3210', '123');
+
+INSERT INTO User (role_id, username, email_address, phone_number, password)
+VALUES (3, 'manager', 'c@example.com', '567-890-1234', '123');
+
+INSERT INTO User (role_id, username, email_address, phone_number, password)
+VALUES (4, 'post_staff', 'd@example.com', '234-567-8901', '123');
+
+INSERT INTO User (role_id, username, email_address, phone_number, password)
+VALUES (5, 'production_staff', 'e@example.com', '890-123-4567', '123');
+
+INSERT INTO User (role_id, username, email_address, phone_number, password)
+VALUES (6, 'admin', 'f@example.com', '456-789-0123', '123');
 
 INSERT INTO role(role_name) VALUES('CUSTOMER');
 INSERT INTO role(role_name) VALUES('SELLER');
