@@ -200,13 +200,13 @@ CREATE TABLE post_report (
     FOREIGN KEY (user_id) REFERENCES User(user_id)
 );
 
---  drop table transaction_log;
+-- drop table transaction_log;
 CREATE TABLE transaction_log (
     transaction_id int AUTO_INCREMENT PRIMARY KEY,
     order_id int NOT NULL,
     amount DECIMAL(10, 2) NOT NULL,
     bank_code VARCHAR(255) NOT NULL,
-    bank_trans_no VARCHAR(255) NOT NULL,
+    bank_tran_no VARCHAR(255) NOT NULL,
     cart_type VARCHAR(255) NOT NULL,
     order_info VARCHAR(255) NOT NULL,
     response_code VARCHAR(255) NOT NULL,
