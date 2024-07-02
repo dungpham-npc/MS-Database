@@ -213,6 +213,7 @@ CREATE TABLE transaction_log (
     pay_date VARCHAR(255) NOT NULL,
     transaction_no VARCHAR(255) NOT NULL,
     transaction_status VARCHAR(255) NOT NULL,
+    txn_ref VARCHAR(255) NOT NULL,
     FOREIGN KEY (order_id) REFERENCES `order`(id)
 );
 
