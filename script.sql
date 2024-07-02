@@ -25,14 +25,14 @@ CREATE TABLE payment_type (
 -- );
 
 -- Create the address table
-CREATE TABLE address (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    unit_number VARCHAR(50) NOT NULL,
-    street_number VARCHAR(50) NOT NULL,
-    address_line VARCHAR(255) NOT NULL,
-    district VARCHAR(100) NOT NULL,
-    postal_code VARCHAR(20) NOT NULL
-);
+-- CREATE TABLE address (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     unit_number VARCHAR(50) NOT NULL,
+--     street_number VARCHAR(50) NOT NULL,
+--     address_line VARCHAR(255) NOT NULL,
+--     district VARCHAR(100) NOT NULL,
+--     postal_code VARCHAR(20) NOT NULL
+-- );
 
 -- Create the User table
 CREATE TABLE User (
@@ -130,24 +130,24 @@ CREATE TABLE voucher (
 
 -- Create the order table
 CREATE TABLE `order` (
-    id int AUTO_INCREMENT PRIMARY KEY,
+    id nvarchar(255) PRIMARY KEY,
     user_id INT NOT NULL,
     -- customer_payment_method_id INT NOT NULL,
-    shipping_address INT NOT NULL,
+    shipping_address NVARCHAR(255) NOT NULL,
     order_status INT NOT NULL,
     voucher_id INT,
     cart_id INT,
-    shipping_fee DECIMAL(10, 2) NOT NULL CHECK (shipping_fee >= 0),
+    shipping_fee DECIMAL(10, 2) CHECK (shipping_fee >= 0),
     total_price DECIMAL(10, 2) NOT NULL CHECK (total_price >= 0),
     shipping_code VARCHAR(50),
-    receiver_name VARCHAR(255) NOT NULL,
-    receiver_phone VARCHAR(15) NOT NULL,
+    receiver_name VARCHAR(255) ,
+    receiver_phone VARCHAR(15),
     order_date DATETIME NOT NULL,
     failure_reason ENUM('Out of Stock', 'Payment Failed', 'Cancelled'),
     failure_reason_note TEXT,
     FOREIGN KEY (user_id) REFERENCES User(user_id),
 --     FOREIGN KEY (customer_payment_method_id) REFERENCES customer_payment_method(id),
-    FOREIGN KEY (shipping_address) REFERENCES address(id),
+    -- FOREIGN KEY (shipping_address) REFERENCES address(id),
 --     FOREIGN KEY (order_status) REFERENCES order_status(id),
     FOREIGN KEY (voucher_id) REFERENCES voucher(voucherid),
     FOREIGN KEY (cart_id) REFERENCES shopping_cart(id)
@@ -158,7 +158,7 @@ CREATE TABLE order_item (
     id INT AUTO_INCREMENT PRIMARY KEY,
     milk_product_id INT NOT NULL,
     voucher_id INT,
-    order_id INT NOT NULL,
+    order_id NVARCHAR(255) NOT NULL,
     quantity INT NOT NULL CHECK (quantity > 0),
     price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
     FOREIGN KEY (milk_product_id) REFERENCES milk_product(product_id),
@@ -203,7 +203,8 @@ CREATE TABLE post_report (
 -- drop table transaction_log;
 CREATE TABLE transaction_log (
     transaction_id int AUTO_INCREMENT PRIMARY KEY,
-    order_id int NOT NULL,
+--    user_id int NOT NULL,
+    -- order_id int not null
     amount DECIMAL(10, 2) NOT NULL,
     bank_code VARCHAR(255) NOT NULL,
     bank_tran_no VARCHAR(255) NOT NULL,
@@ -213,8 +214,9 @@ CREATE TABLE transaction_log (
     pay_date VARCHAR(255) NOT NULL,
     transaction_no VARCHAR(255) NOT NULL,
     transaction_status VARCHAR(255) NOT NULL,
-    txn_ref VARCHAR(255) NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES `order`(id)
+    txn_ref VARCHAR(255) NOT NULL
+  --  FOREIGN KEY (user_id) REFERENCES user(user_id)
+    -- FOREIGN KEY (order_id) REFERENCES `order`(id)
 );
 
 -- Create the user_voucher table
@@ -274,14 +276,14 @@ INSERT INTO role(role_name) VALUES('ADMIN');
 
 
 SET FOREIGN_KEY_CHECKS = 0;
-DELETE FROM milkstore.order WHERE id < 100;
-DELETE FROM post WHERE id < 100;
-DELETE FROM milk_product WHERE product_id < 100;
-DELETE FROM milk_product_category WHERE id < 100;
-DELETE FROM user WHERE user_id < 100;
-DELETE FROM shopping_cart WHERE id < 100;
-DELETE FROM shopping_cart_item WHERE id < 100;
-DELETE FROM order_item WHERE id < 100;
+-- DELETE FROM milkstore.order WHERE id < 100;
+-- DELETE FROM post WHERE id < 100;
+-- DELETE FROM milk_product WHERE product_id < 100;
+-- DELETE FROM milk_product_category WHERE id < 100;
+-- DELETE FROM user WHERE user_id < 100;
+-- DELETE FROM shopping_cart WHERE id < 100;
+-- DELETE FROM shopping_cart_item WHERE id < 100;
+-- DELETE FROM order_item WHERE id < 100;
 
 
 ALTER TABLE user AUTO_INCREMENT = 1;
@@ -313,6 +315,10 @@ INSERT INTO milk_product_category (category_name) VALUES
 ('Organic Milk'),
 ('Flavored Milk'),
 ('Dairy Alternatives');
+
+UPDATE `milkstore`.`user`
+SET `prohibit_status` = false
+WHERE `user_id` = 7;
 
 INSERT INTO post (user_id, title, content, date_created, user_comment, visibility_status) VALUES
 (3, 'Benefits of Organic Milk', 'Organic milk is healthier and more nutritious.', '2024-01-15 10:00:00', 'Great information!', TRUE),
@@ -353,12 +359,12 @@ INSERT INTO shopping_cart (user_id) VALUES
 (10);
 
 
-INSERT INTO `order` (user_id, shipping_address, order_status, voucher_id, cart_id, shipping_fee, total_price, shipping_code, receiver_name, receiver_phone, order_date, failure_reason, failure_reason_note) VALUES
-(6, 1, 1, NULL, 1, 5.00, 45.97, 'SH12345', 'customer1', '1234567890', '2024-01-15 10:00:00', NULL, NULL),
-(7, 2, 2, NULL, 2, 5.00, 39.97, 'SH12346', 'customer2', '0987654321', '2024-01-16 12:00:00', 'Out of Stock', 'One item out of stock.'),
-(8, 3, 3, NULL, 3, 5.00, 49.97, 'SH12347', 'customer3', '1122334455', '2024-01-17 15:00:00', 'Payment Failed', 'Payment could not be processed.'),
-(9, 4, 4, NULL, 4, 5.00, 59.97, 'SH12348', 'customer4', '6677889900', '2024-01-18 17:00:00', 'Cancelled', 'Order was cancelled by user.'),
-(10, 5, 1, NULL, 5, 5.00, 29.97, 'SH12349', 'customer5', '5544332211', '2024-01-19 11:00:00', NULL, NULL);
+-- INSERT INTO `order` (user_id, shipping_address, order_status, voucher_id, cart_id, shipping_fee, total_price, shipping_code, receiver_name, receiver_phone, order_date, failure_reason, failure_reason_note) VALUES
+-- (6, 1, 1, NULL, 1, 5.00, 45.97, 'SH12345', 'customer1', '1234567890', '2024-01-15 10:00:00', NULL, NULL),
+-- (7, 2, 2, NULL, 2, 5.00, 39.97, 'SH12346', 'customer2', '0987654321', '2024-01-16 12:00:00', 'Out of Stock', 'One item out of stock.'),
+-- (8, 3, 3, NULL, 3, 5.00, 49.97, 'SH12347', 'customer3', '1122334455', '2024-01-17 15:00:00', 'Payment Failed', 'Payment could not be processed.'),
+-- (9, 4, 4, NULL, 4, 5.00, 59.97, 'SH12348', 'customer4', '6677889900', '2024-01-18 17:00:00', 'Cancelled', 'Order was cancelled by user.'),
+-- (10, 5, 1, NULL, 5, 5.00, 29.97, 'SH12349', 'customer5', '5544332211', '2024-01-19 11:00:00', NULL, NULL);
 
 
 INSERT INTO order_item (milk_product_id, voucher_id, order_id, quantity, price) VALUES
