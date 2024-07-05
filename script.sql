@@ -132,11 +132,14 @@ CREATE TABLE voucher (
 CREATE TABLE `order` (
     id nvarchar(255) PRIMARY KEY,
     user_id INT NOT NULL,
-    -- customer_payment_method_id INT NOT NULL,
     shipping_address NVARCHAR(255) NOT NULL,
     order_status INT NOT NULL,
+    milk_product_id INT NOT NULL,
     voucher_id INT,
-    cart_id INT,
+     cart_id INT,
+     image text,
+	quantity INT NOT NULL CHECK (quantity > 0),
+    price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
     shipping_fee DECIMAL(10, 2) CHECK (shipping_fee >= 0),
     total_price DECIMAL(10, 2) NOT NULL CHECK (total_price >= 0),
     shipping_code VARCHAR(50),
@@ -146,30 +149,23 @@ CREATE TABLE `order` (
     failure_reason ENUM('Out of Stock', 'Payment Failed', 'Cancelled'),
     failure_reason_note TEXT,
     FOREIGN KEY (user_id) REFERENCES User(user_id),
---     FOREIGN KEY (customer_payment_method_id) REFERENCES customer_payment_method(id),
-    -- FOREIGN KEY (shipping_address) REFERENCES address(id),
---     FOREIGN KEY (order_status) REFERENCES order_status(id),
+    FOREIGN KEY (voucher_id) REFERENCES voucher(voucherid),
+    FOREIGN KEY (milk_product_id) REFERENCES milk_product(product_id),
     FOREIGN KEY (voucher_id) REFERENCES voucher(voucherid),
     FOREIGN KEY (cart_id) REFERENCES shopping_cart(id)
 );
 
 -- Create the order_item table
-CREATE TABLE order_item (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    milk_product_id INT NOT NULL,
-    voucher_id INT,
-    order_id NVARCHAR(255) NOT NULL,
-    quantity INT NOT NULL CHECK (quantity > 0),
-    price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
-    FOREIGN KEY (milk_product_id) REFERENCES milk_product(product_id),
-    FOREIGN KEY (voucher_id) REFERENCES voucher(voucherid),
-    FOREIGN KEY (order_id) REFERENCES `order`(id)
-);
+-- CREATE TABLE order_item (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+
+--     FOREIGN KEY (order_id) REFERENCES `order`(id)
+-- );
 
 -- Create the shopping_cart_item table
 CREATE TABLE shopping_cart_item (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    cart_id INT NOT NULL,
+     cart_id INT,
     product_id INT NOT NULL,
     quantity INT NOT NULL CHECK (quantity > 0),
     FOREIGN KEY (cart_id) REFERENCES shopping_cart(id),
@@ -180,12 +176,10 @@ CREATE TABLE shopping_cart_item (
 CREATE TABLE user_feedback (
     id_of_review INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    ordered_product_id INT NOT NULL,
     feedback_description TEXT NOT NULL,
     feedback_time DATETIME NOT NULL,
     feedback_rating INT NOT NULL CHECK (feedback_rating BETWEEN 1 AND 5),
-    FOREIGN KEY (user_id) REFERENCES User(user_id),
-    FOREIGN KEY (ordered_product_id) REFERENCES order_item(id)
+    FOREIGN KEY (user_id) REFERENCES User(user_id)
 );
 
 -- Create the post_report table
@@ -367,17 +361,17 @@ INSERT INTO shopping_cart (user_id) VALUES
 -- (10, 5, 1, NULL, 5, 5.00, 29.97, 'SH12349', 'customer5', '5544332211', '2024-01-19 11:00:00', NULL, NULL);
 
 
-INSERT INTO order_item (milk_product_id, voucher_id, order_id, quantity, price) VALUES
-(1, NULL, 1, 2, 3.99),
-(4, NULL, 1, 3, 2.99),
-(7, NULL, 2, 2, 3.99),
-(3, NULL, 2, 3, 3.79),
-(8, NULL, 3, 2, 3.49),
-(6, NULL, 3, 1, 2.99),
-(11, NULL, 4, 3, 2.99),
-(10, NULL, 4, 2, 4.49),
-(13, NULL, 4, 1, 3.99),
-(17, NULL, 5, 2, 4.49);
+-- INSERT INTO order_item (milk_product_id, voucher_id, order_id, quantity, price) VALUES
+-- (1, NULL, 1, 2, 3.99),
+-- (4, NULL, 1, 3, 2.99),
+-- (7, NULL, 2, 2, 3.99),
+-- (3, NULL, 2, 3, 3.79),
+-- (8, NULL, 3, 2, 3.49),
+-- (6, NULL, 3, 1, 2.99),
+-- (11, NULL, 4, 3, 2.99),
+-- (10, NULL, 4, 2, 4.49),
+-- (13, NULL, 4, 1, 3.99),
+-- (17, NULL, 5, 2, 4.49);
 
 INSERT INTO shopping_cart_item (product_id, cart_id, quantity) VALUES
 (1, 1, 2),
