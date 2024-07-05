@@ -176,7 +176,7 @@ CREATE TABLE shopping_cart_item (
 CREATE TABLE user_feedback (
     id_of_review INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    feedback_description TEXT NOT NULL,
+    feedback_description TEXT,
     feedback_time DATETIME NOT NULL,
     feedback_rating INT NOT NULL CHECK (feedback_rating BETWEEN 1 AND 5),
     FOREIGN KEY (user_id) REFERENCES User(user_id)
