@@ -129,38 +129,40 @@ CREATE TABLE voucher (
 -- );
 
 -- Create the order table
+-- Bảng order
 CREATE TABLE `order` (
     id nvarchar(255) PRIMARY KEY,
     user_id INT NOT NULL,
     shipping_address NVARCHAR(255) NOT NULL,
     order_status INT NOT NULL,
-    milk_product_id INT NOT NULL,
     voucher_id INT,
-     cart_id INT,
-     image text,
-	quantity INT NOT NULL CHECK (quantity > 0),
-    price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
+    cart_id INT,
     shipping_fee DECIMAL(10, 2) CHECK (shipping_fee >= 0),
     total_price DECIMAL(10, 2) NOT NULL CHECK (total_price >= 0),
     shipping_code VARCHAR(50),
-    receiver_name VARCHAR(255) ,
+    receiver_name VARCHAR(255),
     receiver_phone VARCHAR(15),
     order_date DATETIME NOT NULL,
     failure_reason ENUM('Out of Stock', 'Payment Failed', 'Cancelled'),
     failure_reason_note TEXT,
     FOREIGN KEY (user_id) REFERENCES User(user_id),
     FOREIGN KEY (voucher_id) REFERENCES voucher(voucherid),
-    FOREIGN KEY (milk_product_id) REFERENCES milk_product(product_id),
-    FOREIGN KEY (voucher_id) REFERENCES voucher(voucherid),
     FOREIGN KEY (cart_id) REFERENCES shopping_cart(id)
 );
 
--- Create the order_item table
--- CREATE TABLE order_item (
---     id INT AUTO_INCREMENT PRIMARY KEY,
 
---     FOREIGN KEY (order_id) REFERENCES `order`(id)
--- );
+-- Bảng order_item
+CREATE TABLE order_item (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id NVARCHAR(255) NOT NULL,
+    product_id INT NOT NULL,
+    product_name NVARCHAR(255) NOT NULL,  -- Thêm cột productName
+    quantity INT NOT NULL CHECK (quantity > 0),
+    price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
+    FOREIGN KEY (order_id) REFERENCES `order`(id),
+    FOREIGN KEY (product_id) REFERENCES milk_product(product_id)
+);
+
 
 -- Create the shopping_cart_item table
 CREATE TABLE shopping_cart_item (
