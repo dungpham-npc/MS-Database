@@ -143,7 +143,7 @@ CREATE TABLE `order` (
     receiver_name VARCHAR(255),
     receiver_phone VARCHAR(15),
     order_date DATETIME NOT NULL,
-    failure_reason ENUM('Out of Stock', 'Payment Failed', 'Cancelled'),
+    failure_reason ENUM('CANNOT_DELIVER'),
     failure_reason_note TEXT,
     FOREIGN KEY (user_id) REFERENCES User(user_id),
     FOREIGN KEY (voucher_id) REFERENCES voucher(voucherid),
@@ -362,18 +362,32 @@ INSERT INTO shopping_cart (user_id) VALUES
 -- (9, 4, 4, NULL, 4, 5.00, 59.97, 'SH12348', 'customer4', '6677889900', '2024-01-18 17:00:00', 'Cancelled', 'Order was cancelled by user.'),
 -- (10, 5, 1, NULL, 5, 5.00, 29.97, 'SH12349', 'customer5', '5544332211', '2024-01-19 11:00:00', NULL, NULL);
 
+-- INSERT INTO `order` (user_id, shipping_address, order_status, voucher_id, cart_id, shipping_fee, total_price, shipping_code, receiver_name, receiver_phone, order_date, failure_reason, failure_reason_note) VALUES
+INSERT INTO `order` (user_id, shipping_address, order_status, voucher_id, cart_id, shipping_fee, total_price, shipping_code, receiver_name, receiver_phone, order_date, failure_reason, failure_reason_note) VALUES
+(2, '123 ABC Street, District XYZ, HCM City', 1, NULL, 2, 5.00, 39.97, 'SH12346', 'Customer Two', '0987654321', '2024-01-16 12:00:00', 'Out of Stock', 'One item out of stock.');
 
 -- INSERT INTO order_item (milk_product_id, voucher_id, order_id, quantity, price) VALUES
--- (1, NULL, 1, 2, 3.99),
--- (4, NULL, 1, 3, 2.99),
--- (7, NULL, 2, 2, 3.99),
--- (3, NULL, 2, 3, 3.79),
--- (8, NULL, 3, 2, 3.49),
--- (6, NULL, 3, 1, 2.99),
--- (11, NULL, 4, 3, 2.99),
--- (10, NULL, 4, 2, 4.49),
--- (13, NULL, 4, 1, 3.99),
--- (17, NULL, 5, 2, 4.49);
+INSERT INTO order_item (product_id, order_id, product_name, quantity, price) VALUES
+(7, 2, 'Almond Milk', 2, 3.99),
+(3, 2, 'Organic 2% Milk', 3, 3.79);
+
+INSERT INTO `order` (user_id, shipping_address, order_status, voucher_id, cart_id, shipping_fee, total_price, shipping_code, receiver_name, receiver_phone, order_date, failure_reason, failure_reason_note)
+VALUES
+(2, '123 ABC Street, District XYZ, HCM City', 1, NULL, 2, 5.00, 39.97, 'SH12346', 'Customer Two', '0987654321', '2024-01-16 12:00:00', 'CANNOT_DELIVERY', 'Delivery location unreachable.'),
+(3, '456 XYZ Avenue, District ABC, Hanoi', 1, NULL, 3, 4.50, 45.50, 'SH98765', 'Customer Three', '0123456789', '2024-01-17 14:30:00', NULL, NULL);
+
+
+INSERT INTO order_item (milk_product_id, voucher_id, order_id, quantity, price) VALUES
+(1, NULL, 1, 2, 3.99),
+(4, NULL, 1, 3, 2.99),
+(7, NULL, 2, 2, 3.99),
+(3, NULL, 2, 3, 3.79),
+(8, NULL, 3, 2, 3.49),
+(6, NULL, 3, 1, 2.99),
+(11, NULL, 4, 3, 2.99),
+(10, NULL, 4, 2, 4.49),
+(13, NULL, 4, 1, 3.99),
+(17, NULL, 5, 2, 4.49);
 
 INSERT INTO shopping_cart_item (product_id, cart_id, quantity) VALUES
 (1, 1, 2),
@@ -390,3 +404,4 @@ INSERT INTO shopping_cart_item (product_id, cart_id, quantity) VALUES
 SET FOREIGN_KEY_CHECKS = 1;
 
 
+	
