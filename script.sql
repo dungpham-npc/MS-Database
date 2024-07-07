@@ -137,6 +137,7 @@ CREATE TABLE `order` (
     order_status INT NOT NULL,
     voucher_id INT,
     cart_id INT,
+    image text,
     shipping_fee DECIMAL(10, 2) CHECK (shipping_fee >= 0),
     total_price DECIMAL(10, 2) NOT NULL CHECK (total_price >= 0),
     shipping_code VARCHAR(50),
