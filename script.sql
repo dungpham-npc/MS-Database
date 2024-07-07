@@ -143,6 +143,7 @@ CREATE TABLE `order` (
     receiver_name VARCHAR(255),
     receiver_phone VARCHAR(15),
     order_date DATETIME NOT NULL,
+    image nvarchar(255),
     failure_reason ENUM('Out of Stock', 'Payment Failed', 'Cancelled'),
     failure_reason_note TEXT,
     FOREIGN KEY (user_id) REFERENCES User(user_id),
