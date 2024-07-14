@@ -89,7 +89,8 @@ CREATE TABLE milk_product (
     price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
     manu_date DATE NOT NULL,
     expi_date DATE NOT NULL,
-    status boolean,
+    delete_status boolean,
+    visibility_status BOOLEAN,
     FOREIGN KEY (category_id) REFERENCES milk_product_category(id),
     FOREIGN KEY (post_id) REFERENCES post(id)
 );
