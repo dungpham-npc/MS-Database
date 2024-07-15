@@ -181,6 +181,7 @@ CREATE TABLE user_feedback (
     user_id INT NOT NULL,
     feedback_description TEXT,
     feedback_time DATETIME NOT NULL,
+    feedback_status boolean,
     feedback_rating INT NOT NULL CHECK (feedback_rating BETWEEN 1 AND 5),
     FOREIGN KEY (user_id) REFERENCES User(user_id)
 );
@@ -317,12 +318,18 @@ UPDATE `milkstore`.`user`
 SET `prohibit_status` = false
 WHERE `user_id` = 7;
 
+UPDATE `milkstore`.`user`
+SET
+`prohibit_status` = 0
+WHERE `user_id` =5;
+
 INSERT INTO post (user_id, title, content, date_created, user_comment, visibility_status) VALUES
 (3, 'Benefits of Organic Milk', 'Organic milk is healthier and more nutritious.', '2024-01-15 10:00:00', 'Great information!', TRUE),
 (3, 'Flavored Milk for Kids', 'Flavored milk can be a fun way to get kids to drink milk.', '2024-01-18 15:30:00', 'Very helpful.', TRUE),
 (3, 'Dairy Alternatives', 'Exploring the best dairy alternatives like almond, soy, and oat milk.', '2024-01-20 12:45:00', 'Good to know!', TRUE),
 (3, 'Lactose-Free Milk Options', 'For those who are lactose intolerant, there are many options.', '2024-01-22 09:10:00', 'Thanks for sharing.', TRUE),
 (3, 'The Rise of Organic Products', 'Organic products are becoming more popular.', '2024-01-25 14:25:00', 'Interesting read.', TRUE);
+
 
 
 INSERT INTO milk_product (category_id, post_id, product_name, product_description, product_image, quantity_in_stock, price, manu_date, expi_date, status) VALUES
@@ -364,31 +371,31 @@ INSERT INTO shopping_cart (user_id) VALUES
 -- (10, 5, 1, NULL, 5, 5.00, 29.97, 'SH12349', 'customer5', '5544332211', '2024-01-19 11:00:00', NULL, NULL);
 
 -- INSERT INTO `order` (user_id, shipping_address, order_status, voucher_id, cart_id, shipping_fee, total_price, shipping_code, receiver_name, receiver_phone, order_date, failure_reason, failure_reason_note) VALUES
-INSERT INTO `order` (user_id, shipping_address, order_status, voucher_id, cart_id, shipping_fee, total_price, shipping_code, receiver_name, receiver_phone, order_date, failure_reason, failure_reason_note) VALUES
-(2, '123 ABC Street, District XYZ, HCM City', 1, NULL, 2, 5.00, 39.97, 'SH12346', 'Customer Two', '0987654321', '2024-01-16 12:00:00', 'Out of Stock', 'One item out of stock.');
+-- INSERT INTO `order` (user_id, shipping_address, order_status, voucher_id, cart_id, shipping_fee, total_price, shipping_code, receiver_name, receiver_phone, order_date, failure_reason, failure_reason_note) VALUES
+-- (2, '123 ABC Street, District XYZ, HCM City', 1, NULL, 2, 5.00, 39.97, 'SH12346', 'Customer Two', '0987654321', '2024-01-16 12:00:00', 'Out of Stock', 'One item out of stock.');
 
 -- INSERT INTO order_item (milk_product_id, voucher_id, order_id, quantity, price) VALUES
 INSERT INTO order_item (product_id, order_id, product_name, quantity, price) VALUES
 (7, 2, 'Almond Milk', 2, 3.99),
 (3, 2, 'Organic 2% Milk', 3, 3.79);
 
-INSERT INTO `order` (user_id, shipping_address, order_status, voucher_id, cart_id, shipping_fee, total_price, shipping_code, receiver_name, receiver_phone, order_date, failure_reason, failure_reason_note)
-VALUES
-(2, '123 ABC Street, District XYZ, HCM City', 1, NULL, 2, 5.00, 39.97, 'SH12346', 'Customer Two', '0987654321', '2024-01-16 12:00:00', 'CANNOT_DELIVERY', 'Delivery location unreachable.'),
-(3, '456 XYZ Avenue, District ABC, Hanoi', 1, NULL, 3, 4.50, 45.50, 'SH98765', 'Customer Three', '0123456789', '2024-01-17 14:30:00', NULL, NULL);
+-- INSERT INTO `order` (user_id, shipping_address, order_status, voucher_id, cart_id, shipping_fee, total_price, shipping_code, receiver_name, receiver_phone, order_date, failure_reason, failure_reason_note)
+-- VALUES
+-- (2, '123 ABC Street, District XYZ, HCM City', 1, NULL, 2, 5.00, 39.97, 'SH12346', 'Customer Two', '0987654321', '2024-01-16 12:00:00', 'CANNOT_DELIVERY', 'Delivery location unreachable.'),
+-- (3, '456 XYZ Avenue, District ABC, Hanoi', 1, NULL, 3, 4.50, 45.50, 'SH98765', 'Customer Three', '0123456789', '2024-01-17 14:30:00', NULL, NULL);
 
 
-INSERT INTO order_item (milk_product_id, voucher_id, order_id, quantity, price) VALUES
-(1, NULL, 1, 2, 3.99),
-(4, NULL, 1, 3, 2.99),
-(7, NULL, 2, 2, 3.99),
-(3, NULL, 2, 3, 3.79),
-(8, NULL, 3, 2, 3.49),
-(6, NULL, 3, 1, 2.99),
-(11, NULL, 4, 3, 2.99),
-(10, NULL, 4, 2, 4.49),
-(13, NULL, 4, 1, 3.99),
-(17, NULL, 5, 2, 4.49);
+-- INSERT INTO order_item (milk_product_id, voucher_id, order_id, quantity, price) VALUES
+-- (1, NULL, 1, 2, 3.99),
+-- (4, NULL, 1, 3, 2.99),
+-- (7, NULL, 2, 2, 3.99),
+-- (3, NULL, 2, 3, 3.79),
+-- (8, NULL, 3, 2, 3.49),
+-- (6, NULL, 3, 1, 2.99),
+-- (11, NULL, 4, 3, 2.99),
+-- (10, NULL, 4, 2, 4.49),
+-- (13, NULL, 4, 1, 3.99),
+-- (17, NULL, 5, 2, 4.49);
 
 INSERT INTO shopping_cart_item (product_id, cart_id, quantity) VALUES
 (1, 1, 2),
