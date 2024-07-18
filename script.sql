@@ -274,6 +274,25 @@ CREATE TABLE promotion_products (
 --     payment_url VARCHAR(255)
 -- );
 
+CREATE TABLE refund_request (
+    refundId INT AUTO_INCREMENT PRIMARY KEY,
+    request_time datetime not null,
+    user_id INT,
+    sender_name CHAR(255) CHARACTER SET utf8mb4,
+    sender_phone varchar(10),
+    sender_address CHAR(255) CHARACTER SET utf8mb4,
+    product_name CHAR(255) CHARACTER SET utf8mb4,
+    refund_reason CHAR(255) CHARACTER SET utf8mb4,
+    customer_note CHAR(255) CHARACTER SET utf8mb4,
+    customer_image text,
+    staff_reject_reason CHAR(255) CHARACTER SET utf8mb4,
+    staff_reject_image text,
+    staff_received_image text,
+    refund_request_status int not null,
+    FOREIGN KEY (user_id) REFERENCES User(user_id)
+);
+
+
 
 INSERT INTO role(role_name) VALUES('CUSTOMER');
 INSERT INTO role(role_name) VALUES('SELLER');
