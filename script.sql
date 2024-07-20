@@ -50,6 +50,16 @@ CREATE TABLE User (
     FOREIGN KEY (role_id) REFERENCES role(role_id)
 );
 
+CREATE TABLE user_address (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    address_alias NVARCHAR(50),
+    address_line NVARCHAR(500) NOT NULL,
+    district NVARCHAR(50) NOT NULL,
+    is_default BOOLEAN,
+    FOREIGN KEY (user_id) REFERENCES user(user_id)
+);         
+
 CREATE TABLE temporary_user (
     id INT AUTO_INCREMENT PRIMARY KEY,
 	email_address VARCHAR(50),
