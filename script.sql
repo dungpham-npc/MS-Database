@@ -188,6 +188,7 @@ CREATE TABLE order_item (
     id INT AUTO_INCREMENT PRIMARY KEY,
     order_id NVARCHAR(255) NOT NULL,
     product_id INT NOT NULL,
+    product_image TEXT NOT NULL,
     product_name NVARCHAR(255) NOT NULL,  -- Thêm cột productName
     quantity INT NOT NULL CHECK (quantity > 0),
     price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
@@ -360,7 +361,7 @@ WHERE `user_id` = 7;
 UPDATE `milkstore`.`user`
 SET
 `prohibit_status` = 0
-WHERE `user_id` =5;
+WHERE `user_id` < 100;
 
 INSERT INTO post (user_id, title, content, date_created, user_comment, visibility_status) VALUES
 (3, 'Benefits of Organic Milk', 'Organic milk is healthier and more nutritious.', '2024-01-15 10:00:00', 'Great information!', TRUE),
@@ -414,11 +415,11 @@ INSERT INTO shopping_cart (user_id) VALUES
 -- (2, '123 ABC Street, District XYZ, HCM City', 1, NULL, 2, 5.00, 39.97, 'SH12346', 'Customer Two', '0987654321', '2024-01-16 12:00:00', 'Out of Stock', 'One item out of stock.');
 
 -- INSERT INTO order_item (milk_product_id, voucher_id, order_id, quantity, price) VALUES
-INSERT INTO order_item (product_id, order_id, product_name, quantity, price) VALUES
-(7, 2, 'Almond Milk', 2, 3.99),
-(3, 2, 'Organic 2% Milk', 3, 3.79);
+-- INSERT INTO order_item (product_id, order_id, product_name, quantity, price) VALUES
+-- (7, 2, 'Almond Milk', 2, 3.99),
+-- (3, 2, 'Organic 2% Milk', 3, 3.79);
 
--- INSERT INTO `order` (user_id, shipping_address, order_status, voucher_id, cart_id, shipping_fee, total_price, shipping_code, receiver_name, receiver_phone, order_date, failure_reason, failure_reason_note)
+-- -- INSERT INTO `order` (user_id, shipping_address, order_status, voucher_id, cart_id, shipping_fee, total_price, shipping_code, receiver_name, receiver_phone, order_date, failure_reason, failure_reason_note)
 -- VALUES
 -- (2, '123 ABC Street, District XYZ, HCM City', 1, NULL, 2, 5.00, 39.97, 'SH12346', 'Customer Two', '0987654321', '2024-01-16 12:00:00', 'CANNOT_DELIVERY', 'Delivery location unreachable.'),
 -- (3, '456 XYZ Avenue, District ABC, Hanoi', 1, NULL, 3, 4.50, 45.50, 'SH98765', 'Customer Three', '0123456789', '2024-01-17 14:30:00', NULL, NULL);
