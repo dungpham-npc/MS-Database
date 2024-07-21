@@ -285,11 +285,11 @@ CREATE TABLE promotion_products (
 -- );
 
 CREATE TABLE refund_request (
-    refundId INT AUTO_INCREMENT PRIMARY KEY,
+    refund_id INT AUTO_INCREMENT PRIMARY KEY,
     request_time datetime not null,
     user_id INT,
     sender_name CHAR(255) CHARACTER SET utf8mb4,
-    sender_phone varchar(10),
+    sender_phone varchar(10) CHARACTER SET utf8mb4,
     sender_address CHAR(255) CHARACTER SET utf8mb4,
     product_name CHAR(255) CHARACTER SET utf8mb4,
     refund_reason CHAR(255) CHARACTER SET utf8mb4,
