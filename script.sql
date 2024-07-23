@@ -349,10 +349,10 @@ INSERT INTO User (role_id, email_address, phone_Number, password, username, visi
 (1, 'customer4@example.com', '1234567899', '$2a$10$HcNdVVDf/UbFUaDxZTj9YeWTQvMleq8wddhh.Y0ZMaaakDwKHmD46', 'customer4', TRUE, NULL, NULL),
 (1, 'customer5@example.com', '1234567890', '$2a$10$HcNdVVDf/UbFUaDxZTj9YeWTQvMleq8wddhh.Y0ZMaaakDwKHmD46', 'customer5', TRUE, NULL, NULL);
 
-INSERT INTO milk_product_category (category_name) VALUES
-('Organic Milk'),
-('Flavored Milk'),
-('Dairy Alternatives');
+-- INSERT INTO milk_product_category (category_name) VALUES
+-- ('Organic Milk'),
+-- ('Flavored Milk'),
+-- ('Dairy Alternatives');
 
 UPDATE `milkstore`.`user`
 SET `prohibit_status` = false
@@ -363,44 +363,32 @@ SET
 `prohibit_status` = 0
 WHERE `user_id` < 100;
 
-INSERT INTO post (user_id, title, content, date_created, user_comment, visibility_status) VALUES
-(3, 'Benefits of Organic Milk', 'Organic milk is healthier and more nutritious.', '2024-01-15 10:00:00', 'Great information!', TRUE),
-(3, 'Flavored Milk for Kids', 'Flavored milk can be a fun way to get kids to drink milk.', '2024-01-18 15:30:00', 'Very helpful.', TRUE),
-(3, 'Dairy Alternatives', 'Exploring the best dairy alternatives like almond, soy, and oat milk.', '2024-01-20 12:45:00', 'Good to know!', TRUE),
-(3, 'Lactose-Free Milk Options', 'For those who are lactose intolerant, there are many options.', '2024-01-22 09:10:00', 'Thanks for sharing.', TRUE),
-(3, 'The Rise of Organic Products', 'Organic products are becoming more popular.', '2024-01-25 14:25:00', 'Interesting read.', TRUE);
+-- INSERT INTO post (user_id, title, content, date_created, user_comment, visibility_status) VALUES
+-- (3, 'Benefits of Organic Milk', 'Organic milk is healthier and more nutritious.', '2024-01-15 10:00:00', 'Great information!', TRUE),
+-- (3, 'Flavored Milk for Kids', 'Flavored milk can be a fun way to get kids to drink milk.', '2024-01-18 15:30:00', 'Very helpful.', TRUE),
+-- (3, 'Dairy Alternatives', 'Exploring the best dairy alternatives like almond, soy, and oat milk.', '2024-01-20 12:45:00', 'Good to know!', TRUE),
+-- (3, 'Lactose-Free Milk Options', 'For those who are lactose intolerant, there are many options.', '2024-01-22 09:10:00', 'Thanks for sharing.', TRUE),
+-- (3, 'The Rise of Organic Products', 'Organic products are becoming more popular.', '2024-01-25 14:25:00', 'Interesting read.', TRUE);
 
 ALTER TABLE milkstore.order MODIFY order_status enum('IN_CART','IN_CHECKOUT','PAID','ORDER_TRANSFER','IN_DELIVERY','CANNOT_DELIVER','DELIVERED','COMPLETE_EXCHANGE','CANNOT_CONFRIRM', 'IS_FEEDBACK');
 
-INSERT INTO milk_product (category_id, post_id, product_name, product_description, product_image, quantity_in_stock, price, manu_date, expi_date,delete_status, visibility_status ) VALUES
-(1, 1, 'Organic Whole Milk', 'Fresh and healthy organic whole milk.', 'https://firebasestorage.googleapis.com/v0/b/firebase-service-427505.appspot.com/o/8b3c3bcc-22f8-4546-bdcd-9a30f06f6cdd.jpg?alt=media', 100, 3.99, '2024-01-01', '2024-07-01', FALSE, TRUE),
-(1, 2, 'Organic Skim Milk', 'Low-fat organic skim milk.', 'https://firebasestorage.googleapis.com/v0/b/firebase-service-427505.appspot.com/o/d652673a-8a61-4d07-82ef-f6155a249efe.webp?alt=media', 150, 3.49, '2024-01-01', '2024-07-01', FALSE, TRUE),
-(1, 3, 'Organic 2% Milk', 'Organic milk with 2% fat content.', 'https://firebasestorage.googleapis.com/v0/b/firebase-service-427505.appspot.com/o/353a2dc5-6c34-47d9-93f2-11b88e45000c.jpg?alt=media', 120, 3.79, '2024-01-01', '2024-07-01', FALSE, TRUE),
-(2, 4, 'Chocolate Milk', 'Delicious chocolate flavored milk.', 'https://firebasestorage.googleapis.com/v0/b/firebase-service-427505.appspot.com/o/638d6717-c3c3-4810-90da-5baf9703e584.jpg?alt=media', 200, 2.99, '2024-01-01', '2024-06-01', FALSE, TRUE),
-(2, 5, 'Strawberry Milk', 'Sweet and tasty strawberry milk.', 'https://firebasestorage.googleapis.com/v0/b/firebase-service-427505.appspot.com/o/5348af57-d662-4c5d-9999-caa4a8044c9e.jpg?alt=media', 180, 2.99, '2024-01-01', '2024-06-01', TRUE, TRUE),
-(2, 1, 'Vanilla Milk', 'Smooth vanilla flavored milk.', 'https://firebasestorage.googleapis.com/v0/b/firebase-service-427505.appspot.com/o/9ff0c23d-33af-4e7b-bd43-f19306abcd85.jpg?alt=media', 170, 2.99, '2024-01-01', '2024-06-01', FALSE, TRUE),
-(3, 2, 'Almond Milk', 'Healthy almond milk, dairy-free.', 'https://firebasestorage.googleapis.com/v0/b/firebase-service-427505.appspot.com/o/665ffad7-919e-436b-937d-eafd9187e578.jpg?alt=media', 140, 3.99, '2024-01-01', '2024-12-01', FALSE, TRUE),
-(3, 3, 'Soy Milk', 'Nutritious soy milk, dairy-free.', 'https://firebasestorage.googleapis.com/v0/b/firebase-service-427505.appspot.com/o/d135706b-8825-4225-b2d9-d9dbf4044741.jpg?alt=media', 130, 3.49, '2024-01-01', '2024-12-01', FALSE, TRUE);
--- (3, 4, 'Coconut Milk', 'Refreshing coconut milk, dairy-free.', 'coconut_milk.jpg', 110, 3.89, '2024-01-01', '2024-12-01', TRUE),
--- (1, 5, 'Organic Lactose-Free Milk', 'Organic milk without lactose.', 'organic_lactose_free_milk.jpg', 80, 4.49, '2024-01-01', '2024-07-01', TRUE),
--- (2, 1, 'Banana Milk', 'Yummy banana flavored milk.', 'banana_milk.jpg', 160, 2.99, '2024-01-01', '2024-06-01', TRUE),
--- (2, 2, 'Blueberry Milk', 'Tasty blueberry flavored milk.', 'blueberry_milk.jpg', 150, 2.99, '2024-01-01', '2024-06-01', TRUE),
--- (3, 3, 'Oat Milk', 'Creamy oat milk, dairy-free.', 'oat_milk.jpg', 100, 3.99, '2024-01-01', '2024-12-01', TRUE),
--- (1, 4, 'Organic Chocolate Milk', 'Rich organic chocolate milk.', 'organic_chocolate_milk.jpg', 90, 4.49, '2024-01-01', '2024-07-01', TRUE),
--- (1, 5, 'Organic Strawberry Milk', 'Organic milk with strawberry flavor.', 'organic_strawberry_milk.jpg', 85, 4.49, '2024-01-01', '2024-07-01', TRUE),
--- (2, 1, 'Caramel Milk', 'Sweet caramel flavored milk.', 'caramel_milk.jpg', 100, 2.99, '2024-01-01', '2024-06-01', TRUE),
--- (3, 2, 'Rice Milk', 'Smooth rice milk, dairy-free.', 'rice_milk.jpg', 130, 3.99, '2024-01-01', '2024-12-01', TRUE),
--- (1, 3, 'Organic Almond Milk', 'Organic and dairy-free almond milk.', 'organic_almond_milk.jpg', 110, 4.49, '2024-01-01', '2024-07-01', TRUE),
--- (2, 4, 'Mint Milk', 'Cool and refreshing mint milk.', 'mint_milk.jpg', 120, 2.99, '2024-01-01', '2024-06-01', TRUE),
--- (3, 5, 'Hemp Milk', 'Nutritious hemp milk, dairy-free.', 'hemp_milk.jpg', 90, 4.29, '2024-01-01', '2024-12-01', TRUE);
+-- INSERT INTO milk_product (category_id, post_id, product_name, product_description, product_image, quantity_in_stock, price, manu_date, expi_date,delete_status, visibility_status ) VALUES
+-- (1, 1, 'Organic Whole Milk', 'Fresh and healthy organic whole milk.', 'https://firebasestorage.googleapis.com/v0/b/firebase-service-427505.appspot.com/o/8b3c3bcc-22f8-4546-bdcd-9a30f06f6cdd.jpg?alt=media', 100, 3.99, '2024-01-01', '2024-07-01', FALSE, TRUE),
+-- (1, 2, 'Organic Skim Milk', 'Low-fat organic skim milk.', 'https://firebasestorage.googleapis.com/v0/b/firebase-service-427505.appspot.com/o/d652673a-8a61-4d07-82ef-f6155a249efe.webp?alt=media', 150, 3.49, '2024-01-01', '2024-07-01', FALSE, TRUE),
+-- (1, 3, 'Organic 2% Milk', 'Organic milk with 2% fat content.', 'https://firebasestorage.googleapis.com/v0/b/firebase-service-427505.appspot.com/o/353a2dc5-6c34-47d9-93f2-11b88e45000c.jpg?alt=media', 120, 3.79, '2024-01-01', '2024-07-01', FALSE, TRUE),
+-- (2, 4, 'Chocolate Milk', 'Delicious chocolate flavored milk.', 'https://firebasestorage.googleapis.com/v0/b/firebase-service-427505.appspot.com/o/638d6717-c3c3-4810-90da-5baf9703e584.jpg?alt=media', 200, 2.99, '2024-01-01', '2024-06-01', FALSE, TRUE),
+-- (2, 5, 'Strawberry Milk', 'Sweet and tasty strawberry milk.', 'https://firebasestorage.googleapis.com/v0/b/firebase-service-427505.appspot.com/o/5348af57-d662-4c5d-9999-caa4a8044c9e.jpg?alt=media', 180, 2.99, '2024-01-01', '2024-06-01', TRUE, TRUE),
+-- (2, 1, 'Vanilla Milk', 'Smooth vanilla flavored milk.', 'https://firebasestorage.googleapis.com/v0/b/firebase-service-427505.appspot.com/o/9ff0c23d-33af-4e7b-bd43-f19306abcd85.jpg?alt=media', 170, 2.99, '2024-01-01', '2024-06-01', FALSE, TRUE),
+-- (3, 2, 'Almond Milk', 'Healthy almond milk, dairy-free.', 'https://firebasestorage.googleapis.com/v0/b/firebase-service-427505.appspot.com/o/665ffad7-919e-436b-937d-eafd9187e578.jpg?alt=media', 140, 3.99, '2024-01-01', '2024-12-01', FALSE, TRUE),
+-- (3, 3, 'Soy Milk', 'Nutritious soy milk, dairy-free.', 'https://firebasestorage.googleapis.com/v0/b/firebase-service-427505.appspot.com/o/d135706b-8825-4225-b2d9-d9dbf4044741.jpg?alt=media', 130, 3.49, '2024-01-01', '2024-12-01', FALSE, TRUE);
 
 
-INSERT INTO shopping_cart (user_id) VALUES
-(6),
-(7),
-(8),
-(9),
-(10);
+-- INSERT INTO shopping_cart (user_id) VALUES
+-- (6),
+-- (7),
+-- (8),
+-- (9),
+-- (10);
 
 
 -- INSERT INTO `order` (user_id, shipping_address, order_status, voucher_id, cart_id, shipping_fee, total_price, shipping_code, receiver_name, receiver_phone, order_date, failure_reason, failure_reason_note) VALUES
@@ -437,19 +425,19 @@ INSERT INTO shopping_cart (user_id) VALUES
 -- (13, NULL, 4, 1, 3.99),
 -- (17, NULL, 5, 2, 4.49);
 
-INSERT INTO shopping_cart_item (product_id, cart_id, quantity) VALUES
-(1, 1, 2),
-(4, 1, 3),
-(7, 2, 2),
-(3, 2, 3),
-(8, 3, 2),
-(6, 3, 1),
-(11, 4, 3),
-(10, 4, 2),
-(13, 4, 1),
-(17, 5, 2);
+-- INSERT INTO shopping_cart_item (product_id, cart_id, quantity) VALUES
+-- (1, 1, 2),
+-- (4, 1, 3),
+-- (7, 2, 2),
+-- (3, 2, 3),
+-- (8, 3, 2),
+-- (6, 3, 1),
+-- (11, 4, 3),
+-- (10, 4, 2),
+-- (13, 4, 1),
+-- (17, 5, 2);
 
-SET FOREIGN_KEY_CHECKS = 1;
+-- SET FOREIGN_KEY_CHECKS = 1;
 
 
 	
