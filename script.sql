@@ -91,7 +91,7 @@ CREATE TABLE post (
 -- Create the shopping_cart table
 CREATE TABLE shopping_cart (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT UNIQUE NOT NULL,
+    user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES User(user_id)
 );
 
@@ -173,11 +173,12 @@ CREATE TABLE milk_product (
     product_image VARCHAR(255) NOT NULL,
     quantity_in_stock INT NOT NULL CHECK (quantity_in_stock >= 0),
     price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
-    manu_date DATE NOT NULL,
-    expi_date DATE NOT NULL,
+    manu_date DATE DEFAULT NULL,
+    expi_date DATE DEFAULT NULL,
     delete_status boolean,
     visibility_status BOOLEAN,
     feedback_id int,
+    publish_date DATE DEFAULT NULL,
     FOREIGN KEY (category_id) REFERENCES milk_product_category(id),
     FOREIGN KEY (post_id) REFERENCES post(id)
 );
