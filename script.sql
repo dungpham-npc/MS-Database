@@ -371,7 +371,7 @@ WHERE `user_id` < 100;
 -- (3, 'Lactose-Free Milk Options', 'For those who are lactose intolerant, there are many options.', '2024-01-22 09:10:00', 'Thanks for sharing.', TRUE),
 -- (3, 'The Rise of Organic Products', 'Organic products are becoming more popular.', '2024-01-25 14:25:00', 'Interesting read.', TRUE);
 
-ALTER TABLE milkstore.order MODIFY order_status enum('IN_CART','IN_CHECKOUT','PAID','ORDER_TRANSFER','IN_DELIVERY','CANNOT_DELIVER','DELIVERED','COMPLETE_EXCHANGE','CANNOT_CONFRIRM', 'IS_FEEDBACK');
+ALTER TABLE milkstore.order MODIFY order_status enum('IN_CART','IN_CHECKOUT','PAID','ORDER_TRANSFER','IN_DELIVERY','CANNOT_DELIVER','DELIVERED','COMPLETE_EXCHANGE','CANNOT_CONFRIRM', 'IS_FEEDBACK', 'PRE_ORDERED', 'PREORDERED_ORDER_IN_DELIVERY', 'IN_PREORDER_PROGRESS');
 
 -- INSERT INTO milk_product (category_id, post_id, product_name, product_description, product_image, quantity_in_stock, price, manu_date, expi_date,delete_status, visibility_status ) VALUES
 -- (1, 1, 'Organic Whole Milk', 'Fresh and healthy organic whole milk.', 'https://firebasestorage.googleapis.com/v0/b/firebase-service-427505.appspot.com/o/8b3c3bcc-22f8-4546-bdcd-9a30f06f6cdd.jpg?alt=media', 100, 3.99, '2024-01-01', '2024-07-01', FALSE, TRUE),
